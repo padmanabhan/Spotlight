@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<p>
+    The photographs which the performers upload on the spotlight 
+    website are usually authored by professional photographers.
+</p>
+<p>
+    When a performer submits an image file on the Spotlight website, 
+    the application extracts a thumbnail from it, which is then used throughout the site.
+</p>
+<p>
+    The code which generates these thumbnails is used to create the image on the right, 
+    while the image on the left is the original one.
+</p>
+<img class="original" src="/Photos/DSC_4124.jpg" height="600" />
+<img class="thumb" src="/home/getthumbnail?file=/Photos/DSC_4124.jpg" alt="" />
+<br />
+<img class="original" src="/Photos/DSC_4184.jpg" height="600" />
+<img class="thumb" src="/home/getthumbnail?file=/Photos/DSC_4184.jpg" alt="" />
+<p>
+    As you can see, in 99% of cases this works as expected. However, on a number of occasions 
+    we have received complaints from performers, saying that their thumbnail images appear 
+    "washed out". Examples for such images are given below. Your task is to fix the defect 
+    by modifying the code.
+</p>
+<img class="original" src="/Photos/image2.jpg" height="600" />
+<img class="thumb" src="/home/getthumbnail?file=/Photos/image2.jpg" alt="" />
+<br />
+<img class="original" src="/Photos/image.jpg" height="600" />
+<img class="thumb" src="/home/getthumbnail?file=/Photos/image.jpg" alt="" />
