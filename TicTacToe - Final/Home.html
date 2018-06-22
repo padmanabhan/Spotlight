@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <style>
+        table, td {
+            border: 1px solid black;
+        }
+        table td {
+            width: 50px;
+            height: 50px;
+            padding: 5px;
+            text-align: left;
+        }
+        .whiteImage {
+            display: block;
+            background-image: url('Images/white.png');
+            background-repeat: repeat-y;
+            width: 200px; /* Width of new image */
+            height: 200px; /* Height of new image */
+        }
+        .tickImage {
+            display: block;
+            background-image: url('Images/tick.jpg');
+            background-repeat: repeat-y;
+            width: 200px; /* Width of new image */
+            height: 200px; /* Height of new image */
+        }
+        .crossImage {
+            display: block;
+            background-image: url('Images/cross.jpg');
+            background-repeat: repeat-y;
+            width: 200px; /* Width of new image */
+            height: 200px; /* Height of new image */
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <table id="gameContainer"></table>
+        <div clear="both">
+            <p><span id="resultspan" style="color:blue"></span></p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var gameArray = new Array(3);
+
+        for (var i = 0; i < 3; i++) {
+            gameArray[i] = new Array(3);
+        }
+
+        var gamePosition = 1;
+
+        for (var i = 0; i < 3; i++) {
+            var row = $('<tr>');
+            for (var j = 0; j < 3; j++) {
+                row.append($('<td><img id="a' + gamePosition + '" src="" alt="" class="whiteImage"></img></td>'));
+                gamePosition++;
+            }
+            $('#gameContainer').append(row);
+        }
+
+        var tickturn = 1;
+        var checkplayer = 0;
+        $('img').click(function () {
+            if (checkplayer > 0) return;
+            if (this.className === 'whiteImage') {
+                $(this).removeClass('whiteImage');
+                if (tickturn == 1) {
+                    $(this).addClass('tickImage');
+                    tickturn = 2;
+                }
+                else if (tickturn == 2) {
+                    $(this).addClass('crossImage');
+                    tickturn = 1;
+                }
+            }
+
+            if (checkplayer == 0)
+                checkplayer = CheckMatchingRow($('#a1'), $('#a2'), $('#a3'));
+
+            if (checkplayer == 0)
+                checkplayer = CheckMatchingRow($('#a4'), $('#a5'), $('#a6'));
+
+            if (checkplayer == 0)
+                checkplayer = CheckMatchingRow($('#a7'), $('#a8'), $('#a9'));
+
+            if (checkplayer == 0)
+                checkplayer = CheckMatchingRow($('#a1'), $('#a4'), $('#a7'));
+
+            if (checkplayer == 0)
+                checkplayer = CheckMatchingRow($('#a2'), $('#a5'), $('#a8'));
+
+            if (checkplayer == 0)
+                checkplayer = CheckMatchingRow($('#a3'), $('#a6'), $('#a9'));
+
+            if (checkplayer == 0)
+                checkplayer = CheckMatchingRow($('#a1'), $('#a5'), $('#a9'));
+
+            if (checkplayer == 0)
+                checkplayer = CheckMatchingRow($('#a3'), $('#a5'), $('#a7'));
+
+            if (checkplayer > 0)
+                $('#resultspan').text("Player " + checkplayer + " is winner");
+        });
+
+        function CheckMatchingRow(img1, img2, img3) {
+            if (img2.attr('class') == 'whiteImage' || img2.attr('class') == 'whiteImage' || img2.attr('class') == 'whiteImage')
+                return 0;
+
+            if (img1.attr('class') == img2.attr('class') && img2.attr('class') == img3.attr('class')) {
+                if (img1.attr('class') == 'tickImage')
+                    return 1;
+                else
+                    return 2;
+            }
+            else
+                return 0;
+        }
+
+    </script>
+</body>
+</html>
